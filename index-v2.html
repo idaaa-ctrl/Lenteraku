@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LenteraPustaka — Toko E-Book Kurasi &amp; Literasi Digital</title>
+  <meta name="description" content="Platform jual beli e-book pilihan dengan sampul visual editorial, katalog interaktif, pratinjau bab, testimoni pembaca, dan keranjang belanja." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf7f2;
+      --bg-alt: #f2ece1;
+      --surface: #ffffff;
+      --ink: #1e2421;
+      --muted: #5b6560;
+      --line: #e3dcd0;
+      --accent: #1f5c4d;
+      --accent-hover: #17473b;
+      --accent-soft: #e6f0ed;
+      --warm: #b4532a;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 4px 14px rgba(30, 36, 33, 0.05);
+      --shadow-md: 0 14px 34px rgba(30, 36, 33, 0.09);
+      --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Newsreader", Georgia, serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .container {
+      width: min(1140px, 92%);
+      margin-inline: auto;
+    }
+
+    /* Top Promo Bar */
+    .top-promo-bar {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.84rem;
+      padding: 8px 0;
+    }
+
+    .promo-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .promo-bar-inner a {
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text strong {
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-text small {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .main-nav a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .main-nav a:hover {
+      color: var(--ink);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .cart-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .cart-badge {
+      display: inline-grid;
+      place-items: center;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin-inline: auto;
+      background: var(--ink);
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 4% 20px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      gap: 10px;
+    }
+
+    .mobile-nav a {
+      padding: 8px 4px;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.99);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--ink);
+    }
+
+    .btn-sm {
+      padding: 9px 14px;
+      font-size: 0.85rem;
+      border-radius: 10px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 56px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-family: var(--font-serif);
+      font-size: clamp(2.15rem, 4vw, 3.25rem);
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 26px;
+      font-size: 1.04rem;
+      color: var(--muted);
+      max-width: 54ch;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-metrics strong {
+      display: block;
+      font-size: 1.22rem;
+    }
+
+    .hero-metrics span {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    .featured-book-card {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      gap: 18px;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .featured-mini-cover {
+      width: 104px;
+      height: 138px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+    }
+
+    .featured-book-details h2 {
+      margin: 6px 0 4px;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.25;
+    }
+
+    .featured-book-details p {
+      margin: 0 0 12px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .mini-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .featured-book-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .current-price {
+      font-size: 1.05rem;
+    }
+
+    .old-price {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    /* Sections */
+    .section {
+      padding: 76px 0;
+    }
+
+    .section-alt {
+      background: var(--bg-alt);
+      border-block: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .section-header.centered {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .section-desc {
+      margin: 0;
+      max-width: 44ch;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Catalog Toolbar & Grid */
+    .catalog-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pill:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .pill.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .search-box input {
+      width: 260px;
+      max-width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 0.92rem;
+    }
+
+    .search-box input:focus {
+      outline: 2px solid var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .book-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-cover-wrap {
+      position: relative;
+      background: var(--bg-alt);
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+
+    .card-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-format-pill {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(20, 25, 22, 0.78);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-meta-top {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--warm);
+      margin-bottom: 6px;
+    }
+
+    .card-body h3 {
+      margin: 0 0 6px;
+      font-family: var(--font-serif);
+      font-size: 1.28rem;
+      line-height: 1.28;
+    }
+
+    .card-author {
+      margin: 0 0 12px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .card-excerpt {
+      margin: 0 0 18px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .card-price {
+      font-weight: 700;
+      font-size: 1.02rem;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      background: var(--surface);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-md);
+      margin-top: 16px;
+    }
+
+    /* Features & Testimonials */
+    .features-grid,
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card,
+    .testimonial-card {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 26px;
+    }
+
+    .feature-num {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--warm);
+      margin-bottom: 10px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+
+    .feature-card p,
+    .testimonial-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .testimonial-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .testimonial-card footer {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .testimonial-card footer span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* FAQ */
+    .faq-container {
+      max-width: 780px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+    }
+
+    .faq-item summary {
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .faq-item p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 36px 0;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-inner p {
+      margin: 4px 0 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Modal & Cart Drawer */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(20, 25, 22, 0.48);
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 60;
+      width: min(660px, 92%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+    }
+
+    .modal-header,
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-footer {
+      border-bottom: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .badge {
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .modal-body {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 185px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .detail-cover-img {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .detail-info h3 {
+      margin: 0 0 4px;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+    }
+
+    .detail-author,
+    .detail-meta {
+      margin: 0 0 8px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .detail-synopsis {
+      margin: 12px 0 16px;
+      font-size: 0.94rem;
+    }
+
+    .detail-highlights ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .price-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .detail-price-wrap strong {
+      font-size: 1.2rem;
+    }
+
+    /* Cart Drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 65;
+      width: min(420px, 100%);
+      background: var(--surface);
+      border-left: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-md);
+    }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cart-header h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 40px 12px;
+      color: var(--muted);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cart-item h4 {
+      margin: 0 0 4px;
+      font-size: 0.95rem;
+    }
+
+    .cart-item small {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .cart-footer {
+      padding: 18px 20px;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .promo-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .promo-form input {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 0.9rem;
+    }
+
+    .promo-feedback {
+      margin: 6px 0 12px;
+      font-size: 0.82rem;
+      min-height: 18px;
+      color: var(--accent);
+    }
+
+    .summary-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .discount-row {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .total-row {
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      font-size: 1.05rem;
+    }
+
+    .checkout-confirmation {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .book-grid,
+      .features-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-cover-img {
+        max-width: 210px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .main-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-promo-bar">
+    <div class="container promo-bar-inner">
+      <span>Promo Peluncuran: Gunakan kode <strong>HEMAT20</strong> untuk potongan 20% seluruh e-book</span>
+      <a href="#katalog">Lihat Katalog &rarr;</a>
+    </div>
+  </div>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Beranda LenteraPustaka">
+        <span class="brand-mark" aria-hidden="true">LP</span>
+        <span class="brand-text">
+          <strong>LenteraPustaka</strong>
+          <small>E-Book Kurasi &amp; Literasi</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a href="#katalog">Katalog</a>
+        <a href="#keunggulan">Keunggulan</a>
+        <a href="#testimoni">Testimoni</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="cart-btn" id="openCartBtn" aria-label="Buka keranjang belanja">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span>Keranjang</span>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav" hidden>
+      <a href="#katalog">Katalog E-Book</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Kurasi Bacaan Digital Berkualitas</span>
+          <h1>Bacaan bermakna yang siap menemani tumbuh kembang Anda.</h1>
+          <p class="hero-subtitle">
+            Temukan e-book pilihan seputar keuangan pribadi, pencatatan usaha, produktivitas, psikologi terapan, dan fiksi reflektif. Format PDF &amp; EPUB rapi, nyaman dibaca di berbagai layar.
+          </p>
+          <div class="hero-cta">
+            <a href="#katalog" class="btn btn-primary">Jelajahi Katalog</a>
+            <button type="button" class="btn btn-secondary" id="previewFeaturedBtn">Intip Sinopsis Unggulan</button>
+          </div>
+          <div class="hero-metrics">
+            <div>
+              <strong>12.400+</strong>
+              <span>Pembaca aktif</span>
+            </div>
+            <div>
+              <strong>4,9 / 5</strong>
+              <span>Rating pembaca</span>
+            </div>
+            <div>
+              <strong>PDF + EPUB</strong>
+              <span>Siap baca &amp; cetak</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-artwork-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" class="hero-illustration" role="img" aria-label="Ilustrasi pembaca digital LenteraPustaka dengan e-book Seni Mengelola Arus Kas">
+              <defs>
+                <linearGradient id="deskBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#efe6d6"/>
+                  <stop offset="100%" stop-color="#dfd2bc"/>
+                </linearGradient>
+                <linearGradient id="bookSpine" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#1f5c4d"/>
+                  <stop offset="100%" stop-color="#12362d"/>
+                </linearGradient>
+              </defs>
+              <rect width="720" height="480" rx="28" fill="url(#deskBg)"/>
+              <circle cx="585" cy="105" r="95" fill="#b4532a" opacity="0.12"/>
+              <circle cx="135" cy="390" r="120" fill="#1f5c4d" opacity="0.1"/>
+              <rect x="110" y="70" width="320" height="340" rx="22" fill="#1e2421" stroke="#39443e" stroke-width="4"/>
+              <rect x="128" y="90" width="284" height="300" rx="12" fill="#fcfaf6"/>
+              <rect x="148" y="114" width="104" height="14" rx="7" fill="#1f5c4d" opacity="0.85"/>
+              <rect x="148" y="142" width="244" height="10" rx="5" fill="#d9d1c5"/>
+              <rect x="148" y="162" width="218" height="10" rx="5" fill="#d9d1c5"/>
+              <rect x="148" y="182" width="232" height="10" rx="5" fill="#d9d1c5"/>
+              <rect x="148" y="214" width="244" height="84" rx="12" fill="#e6f0ed"/>
+              <text x="166" y="246" fill="#1f5c4d" font-family="Georgia, serif" font-size="18" font-weight="700">Bab 01: Arus Kas Sadar</text>
+              <text x="166" y="272" fill="#3a4742" font-family="sans-serif" font-size="13">Pisahkan kebutuhan pokok, tabungan,</text>
+              <text x="166" y="290" fill="#3a4742" font-family="sans-serif" font-size="13">dan pengeluaran impulsif sejak awal bulan.</text>
+              <rect x="148" y="318" width="126" height="34" rx="10" fill="#1f5c4d"/>
+              <text x="211" y="340" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="600">Baca Ringkasan</text>
+              <rect x="462" y="102" width="174" height="248" rx="16" fill="url(#bookSpine)"/>
+              <rect x="478" y="122" width="84" height="22" rx="11" fill="#e5a967"/>
+              <text x="520" y="137" text-anchor="middle" fill="#1e2421" font-family="sans-serif" font-size="10" font-weight="700">PDF + EPUB</text>
+              <text x="478" y="184" fill="#ffffff" font-family="Georgia, serif" font-size="22" font-weight="700">Seni Mengelola</text>
+              <text x="478" y="212" fill="#f0c38e" font-family="Georgia, serif" font-size="20" font-style="italic">Arus Kas</text>
+              <text x="478" y="318" fill="#dcebe5" font-family="sans-serif" font-size="12">Raka Pratama, Ak.</text>
+              <circle cx="550" cy="396" r="34" fill="#ffffff" stroke="#d8cfc0" stroke-width="2"/>
+              <circle cx="550" cy="396" r="24" fill="#6d3d24"/>
+              <path d="M584 386 Q602 396 584 406" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="featured-book-card">
+            <div class="featured-mini-cover" id="heroMiniCover" aria-hidden="true"></div>
+            <div class="featured-book-details">
+              <span class="mini-tag">Terlaris Minggu Ini</span>
+              <h2>Seni Mengelola Arus Kas &amp; Keputusan Finansial</h2>
+              <p>Raka Pratama, Ak. &bull; 218 Halaman</p>
+              <div class="featured-book-footer">
+                <div class="price-row">
+                  <strong class="current-price">Rp79.000</strong>
+                  <span class="old-price">Rp119.000</span>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" data-add-id="1">Tambah</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="katalog">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Katalog Pilihan</span>
+            <h2>Koleksi e-book siap baca</h2>
+          </div>
+          <p class="section-desc">
+            Saring berdasarkan kategori atau cari judul maupun penulis favorit Anda, lalu buka detail untuk melihat ringkasan bab.
+          </p>
+        </div>
+
+        <div class="catalog-toolbar">
+          <div class="category-pills" role="tablist" aria-label="Filter kategori e-book">
+            <button type="button" class="pill active" data-category="Semua">Semua</button>
+            <button type="button" class="pill" data-category="Keuangan">Keuangan</button>
+            <button type="button" class="pill" data-category="Produktivitas">Produktivitas</button>
+            <button type="button" class="pill" data-category="Psikologi">Psikologi</button>
+            <button type="button" class="pill" data-category="Fiksi">Fiksi</button>
+          </div>
+
+          <div class="search-box">
+            <label for="searchInput" class="sr-only">Cari judul atau penulis e-book</label>
+            <input type="search" id="searchInput" placeholder="Cari judul atau penulis..." autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="book-grid" id="bookGrid"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <h3>E-book tidak ditemukan</h3>
+          <p>Coba kata kunci lain atau pilih kategori <strong>Semua</strong> untuk melihat seluruh katalog.</p>
+          <button type="button" class="btn btn-secondary btn-sm" id="resetFilterBtn">Reset Filter</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="keunggulan">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="eyebrow">Mengapa LenteraPustaka</span>
+          <h2>Desain bacaan yang rapi, terstruktur, dan nyaman</h2>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-num">01</div>
+            <h3>Tata Letak Responsif &amp; Bersih</h3>
+            <p>Setiap e-book ditata dengan spasi baca yang lega, hierarki bab jelas, dan tampilan yang nyaman di tablet, laptop, maupun ponsel.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-num">02</div>
+            <h3>Materi Praktis &amp; Sistematis</h3>
+            <p>Disusun dengan langkah bertahap, contoh kasus nyata, dan poin ringkasan agar mudah diterapkan pada aktivitas sehari-hari.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-num">03</div>
+            <h3>Siap Dikembangkan di GitHub Pages</h3>
+            <p>Berkas HTML mandiri yang ringan, cepat dimuat, serta mudah dikustomisasi untuk kebutuhan merek maupun integrasi pesanan klien.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testimoni">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Ulasan Pembaca</span>
+            <h2>Cerita mereka setelah membaca koleksi kami</h2>
+          </div>
+        </div>
+
+        <div class="testimonials-grid">
+          <blockquote class="testimonial-card">
+            <p>&ldquo;Penjelasan arus kas dan pos anggaran di bukunya sangat runtut. Saya langsung bisa menyusun catatan keuangan bulanan yang lebih rapi.&rdquo;</p>
+            <footer>
+              <strong>Nadia Kusuma</strong>
+              <span>Analis Operasional &bull; Surabaya</span>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card">
+            <p>&ldquo;Gaya bahasanya tidak menggurui. Panduan manajemen waktu mingguan membantu saya menyelesaikan proyek tanpa keteteran.&rdquo;</p>
+            <footer>
+              <strong>Bagas Wijaya</strong>
+              <span>Mahasiswa &amp; Desainer Lepas &bull; Yogyakarta</span>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card">
+            <p>&ldquo;Cerita-cerita fiksinya hangat dan menenangkan. Enak dibaca pelan-pelan di waktu luang setelah seharian beraktivitas.&rdquo;</p>
+            <footer>
+              <strong>Ratna Pramesti</strong>
+              <span>Editor Konten &bull; Bandung</span>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="faq">
+      <div class="container faq-container">
+        <div class="section-header centered">
+          <span class="eyebrow">Pertanyaan Umum</span>
+          <h2>Informasi singkat sebelum mulai</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Format berkas apa saja yang tersedia?</summary>
+            <p>Setiap judul e-book dirancang untuk format <strong>PDF</strong> beresolusi tajam dan <strong>EPUB</strong> yang fleksibel di berbagai aplikasi pembaca digital.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Bagaimana cara memakai kode diskon di keranjang?</summary>
+            <p>Buka panel <strong>Keranjang</strong>, ketik kode <strong>HEMAT20</strong> pada kolom promo, lalu klik <strong>Terapkan</strong> untuk mendapatkan potongan 20%.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah berkas HTML ini bisa langsung diunggah ke GitHub Pages?</summary>
+            <p>Ya. Cukup unggah berkas <code>index.html</code> ini ke cabang <code>main</code> repositori GitHub Anda dan aktifkan GitHub Pages pada menu <strong>Settings &gt; Pages</strong>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>LenteraPustaka</strong>
+        <p>Template platform e-book mandiri dengan ilustrasi visual siap unggah ke GitHub Pages.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#katalog">Katalog</a>
+        <a href="#keunggulan">Keunggulan</a>
+        <a href="#testimoni">Testimoni</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Sinopsis / Detail Buku -->
+  <div class="modal-backdrop" id="detailModalBackdrop" hidden></div>
+  <div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden>
+    <div class="modal-header">
+      <span class="badge" id="detailCategory">Kategori</span>
+      <button type="button" class="icon-btn" id="closeDetailBtn" aria-label="Tutup detail e-book">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-cover-box" id="detailCoverBox" aria-hidden="true"></div>
+      <div class="detail-info">
+        <h3 id="detailTitle">Judul Buku</h3>
+        <p class="detail-author" id="detailAuthor">Penulis</p>
+        <p class="detail-meta" id="detailMeta">Halaman &bull; Format</p>
+        <p class="detail-synopsis" id="detailSynopsis">Sinopsis</p>
+        <div class="detail-highlights">
+          <strong>Poin utama di dalam e-book:</strong>
+          <ul id="detailHighlights"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="detail-price-wrap">
+        <span class="price-label">Harga</span>
+        <strong id="detailPrice">Rp0</strong>
+      </div>
+      <button type="button" class="btn btn-primary" id="detailAddBtn">Tambah ke Keranjang</button>
+    </div>
+  </div>
+
+  <!-- Drawer Keranjang Belanja -->
+  <div class="modal-backdrop" id="cartBackdrop" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+    <div class="cart-header">
+      <h2 id="cartTitle">Keranjang Anda</h2>
+      <button type="button" class="icon-btn" id="closeCartBtn" aria-label="Tutup keranjang">&times;</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-footer" id="cartFooter">
+      <form class="promo-form" id="promoForm">
+        <label for="promoInput" class="sr-only">Kode promo</label>
+        <input type="text" id="promoInput" placeholder="Kode promo (coba: HEMAT20)" />
+        <button type="submit" class="btn btn-secondary btn-sm">Terapkan</button>
+      </form>
+      <p class="promo-feedback" id="promoFeedback" aria-live="polite"></p>
+
+      <div class="summary-lines">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotalText">Rp0</span>
+        </div>
+        <div class="summary-row discount-row" id="discountRow" hidden>
+          <span>Diskon (<span id="appliedPromoCode"></span>)</span>
+          <span id="discountText">-Rp0</span>
+        </div>
+        <div class="summary-row total-row">
+          <strong>Total Pembayaran</strong>
+          <strong id="totalText">Rp0</strong>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">Lanjutkan Pemesanan</button>
+      <div class="checkout-confirmation" id="checkoutConfirmation" hidden></div>
+    </div>
+  </aside>
+
+  <script>
+    const BOOKS = [
+      {
+        id: 1,
+        title: "Seni Mengelola Arus Kas & Keputusan Finansial",
+        author: "Raka Pratama, Ak.",
+        category: "Keuangan",
+        price: 79000,
+        pages: 218,
+        format: "PDF + EPUB",
+        gradient: "linear-gradient(145deg, #1b4d3e 0%, #0d261e 100%)",
+        accentChip: "#e5a967",
+        excerpt: "Panduan praktis menyusun anggaran bulanan, dana darurat, dan pencatatan kas pribadi yang konsisten.",
+        synopsis: "Banyak orang sebenarnya memiliki penghasilan yang cukup, tetapi sering kebingungan ke mana uang mengalir di akhir bulan. Buku ini membahas langkah sederhana memisahkan pos kebutuhan, tabungan, dan pengeluaran diskresioner tanpa rumus yang rumit.",
+        highlights: [
+          "Kerangka pencatatan kas mingguan selama 15 menit",
+          "Strategi bertahap membangun dana darurat aman",
+          "Contoh lembar rekap keuangan yang mudah ditiru"
+        ]
+      },
+      {
+        id: 2,
+        title: "Fokus Tenang di Tengah Tumpukan Tugas",
+        author: "Sinta Maharani",
+        category: "Produktivitas",
+        price: 65000,
+        pages: 164,
+        format: "PDF + EPUB",
+        gradient: "linear-gradient(145deg, #27497a 0%, #13243d 100%)",
+        accentChip: "#a8c7f5",
+        excerpt: "Sistem perencanaan harian realistis untuk menyelesaikan pekerjaan prioritas tanpa mengorbankan waktu istirahat.",
+        synopsis: "Alih-alih memaksakan jadwal super padat yang cepat memicu kelelahan, e-book ini memperkenalkan metode blok waktu fleksibel, pemilahan tugas berdampak tinggi, dan rutinitas penutup hari agar pikiran tetap jernih.",
+        highlights: [
+          "Teknik memilah tugas penting vs sekadar mendesak",
+          "Rancangan rencana mingguan anti-keteteran",
+          "Cara kembali fokus setelah terdistraksi"
+        ]
+      },
+      {
+        id: 3,
+        title: "Membaca Ulang Pola Pikir & Kebiasaan Sehari-hari",
+        author: "Dr. Hendra Gunawan",
+        category: "Psikologi",
+        price: 85000,
+        pages: 240,
+        format: "PDF + EPUB",
+        gradient: "linear-gradient(145deg, #8c4227 0%, #471d0e 100%)",
+        accentChip: "#f4be9f",
+        excerpt: "Memahami pemicu kebiasaan, bias pengambilan keputusan, dan cara membangun perubahan kecil yang bertahan lama.",
+        synopsis: "Perubahan besar jarang lahir dari tekad sesaat. Melalui pendekatan psikologi terapan yang mudah dicerna, buku ini membantu Anda mengenali pemicu otomatis dalam keseharian dan menggantinya dengan kebiasaan yang mendukung tujuan jangka panjang.",
+        highlights: [
+          "Mengenali isyarat pemicu dan respons kebiasaan",
+          "Menghadapi keraguan saat memulai target baru",
+          "Refleksi mingguan untuk menjaga konsistensi"
+        ]
+      },
+      {
+        id: 4,
+        title: "Surat dari Kota Hujan & Stasiun Lama",
+        author: "Ayu Lestari",
+        category: "Fiksi",
+        price: 59000,
+        pages: 192,
+        format: "PDF + EPUB",
+        gradient: "linear-gradient(145deg, #5b437a 0%, #2b1d3d 100%)",
+        accentChip: "#dfc9ff",
+        excerpt: "Kumpulan cerita pendek hangat tentang persahabatan, perjalanan pulang, dan keberanian memilih arah hidup sendiri.",
+        synopsis: "Berlatar sudut-sudut kota yang akrab dan suasana sore yang teduh, sembilan kisah dalam buku ini menyoroti pertemuan tak terduga, percakapan jujur antaranggota keluarga, serta keberanian berdamai dengan masa lalu.",
+        highlights: [
+          "9 cerita pendek utuh dengan nuansa hangat",
+          "Ilustrasi pembatas bab bergaya editorial",
+          "Cocok untuk bacaan santai akhir pekan"
+        ]
+      },
+      {
+        id: 5,
+        title: "Fundamental Pencatatan Usaha Kecil",
+        author: "Raka Pratama, Ak.",
+        category: "Keuangan",
+        price: 89000,
+        pages: 205,
+        format: "PDF + EPUB",
+        gradient: "linear-gradient(145deg, #255c42 0%, #102e20 100%)",
+        accentChip: "#a5e3c4",
+        excerpt: "Dasar pembukuan usaha rumahan dan toko online: memisahkan modal, menghitung HPP, dan memantau laba bersih.",
+        synopsis: "Banyak usaha kecil berjalan ramai namun sulit melihat untung sebenarnya karena uang pribadi dan usaha tercampur. E-book ini mengurai konsep dasar pembukuan dengan bahasa yang ramah pemula lengkap dengan studi kasus jualan produk.",
+        highlights: [
+          "Cara menghitung harga pokok dan margin realistis",
+          "Memantau stok, piutang, dan arus kas usaha",
+          "Checklist evaluasi kesehatan usaha tiap bulan"
+        ]
+      },
+      {
+        id: 6,
+        title: "Catatan Ruang Kerja yang Teratur",
+        author: "Dimas Santoso",
+        category: "Produktivitas",
+        price: 55000,
+        pages: 142,
+        format: "PDF + EPUB",
+        gradient: "linear-gradient(145deg, #755629 0%, #3d2b11 100%)",
+        accentChip: "#f3cf96",
+        excerpt: "Menata folder digital, catatan proyek, dan alur kerja sederhana agar mudah dicari saat dibutuhkan.",
+        synopsis: "File berserakan dan catatan yang tersebar di berbagai aplikasi sering membuang waktu berharga. Pelajari prinsip penamaan berkas, arsip proyek, dan sistem catatan ringkas yang tetap mudah dirawat dalam jangka panjang.",
+        highlights: [
+          "Struktur folder digital yang rapi dan skalabel",
+          "Template catatan rapat dan riset singkat",
+          "Ritual bersih-bersih digital bulanan"
+        ]
+      }
+    ];
+
+    const PROMO_CODES = {
+      HEMAT20: 0.2
+    };
+
+    const state = {
+      category: "Semua",
+      search: "",
+      cart: [],
+      promoCode: null
+    };
+
+    const el = {
+      heroMiniCover: document.getElementById("heroMiniCover"),
+      bookGrid: document.getElementById("bookGrid"),
+      emptyState: document.getElementById("emptyState"),
+      resetFilterBtn: document.getElementById("resetFilterBtn"),
+      searchInput: document.getElementById("searchInput"),
+      categoryPills: Array.from(document.querySelectorAll(".pill")),
+      cartCount: document.getElementById("cartCount"),
+      openCartBtn: document.getElementById("openCartBtn"),
+      closeCartBtn: document.getElementById("closeCartBtn"),
+      cartDrawer: document.getElementById("cartDrawer"),
+      cartBackdrop: document.getElementById("cartBackdrop"),
+      cartItems: document.getElementById("cartItems"),
+      promoForm: document.getElementById("promoForm"),
+      promoInput: document.getElementById("promoInput"),
+      promoFeedback: document.getElementById("promoFeedback"),
+      subtotalText: document.getElementById("subtotalText"),
+      discountRow: document.getElementById("discountRow"),
+      appliedPromoCode: document.getElementById("appliedPromoCode"),
+      discountText: document.getElementById("discountText"),
+      totalText: document.getElementById("totalText"),
+      checkoutBtn: document.getElementById("checkoutBtn"),
+      checkoutConfirmation: document.getElementById("checkoutConfirmation"),
+      detailModal: document.getElementById("detailModal"),
+      detailModalBackdrop: document.getElementById("detailModalBackdrop"),
+      closeDetailBtn: document.getElementById("closeDetailBtn"),
+      detailCategory: document.getElementById("detailCategory"),
+      detailCoverBox: document.getElementById("detailCoverBox"),
+      detailTitle: document.getElementById("detailTitle"),
+      detailAuthor: document.getElementById("detailAuthor"),
+      detailMeta: document.getElementById("detailMeta"),
+      detailSynopsis: document.getElementById("detailSynopsis"),
+      detailHighlights: document.getElementById("detailHighlights"),
+      detailPrice: document.getElementById("detailPrice"),
+      detailAddBtn: document.getElementById("detailAddBtn"),
+      previewFeaturedBtn: document.getElementById("previewFeaturedBtn"),
+      menuToggle: document.getElementById("menuToggle"),
+      mobileNav: document.getElementById("mobileNav")
+    };
+
+    function formatRupiah(amount) {
+      return "Rp" + Math.round(amount).toLocaleString("id-ID");
+    }
+
+    function getBookById(id) {
+      return BOOKS.find((book) => book.id === Number(id));
+    }
+
+    function buildCoverSvg(book, compact = false) {
+      const titleLines = book.title.split(" ");
+      const lines = [];
+      let current = "";
+      titleLines.forEach((word) => {
+        const next = current ? `${current} ${word}` : word;
+        if (next.length > (compact ? 16 : 20)) {
+          lines.push(current);
+          current = word;
+        } else {
+          current = next;
+        }
+      });
+      if (current) lines.push(current);
+      const visibleLines = lines.slice(0, compact ? 3 : 4);
+
+      const svgTitle = visibleLines
+        .map((line, idx) => {
+          const y = (compact ? 68 : 112) + idx * (compact ? 24 : 34);
+          return `<text x="${compact ? 14 : 22}" y="${y}" fill="#ffffff" font-family="Georgia, serif" font-size="${compact ? 18 : 26}" font-weight="700">${line}</text>`;
+        })
+        .join("");
+
+      return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 270" class="card-cover-img" role="img" aria-label="Sampul ${book.title}">
+          <rect width="360" height="270" fill="#181c1a"/>
+          <rect x="0" y="0" width="360" height="270" style="background: ${book.gradient}" opacity="0"/>
+          <defs>
+            <linearGradient id="g-${book.id}-${compact ? "c" : "f"}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="${book.accentChip}" stop-opacity="0.28"/>
+              <stop offset="100%" stop-color="#141816" stop-opacity="0.92"/>
+            </linearGradient>
+          </defs>
+          <rect width="360" height="270" fill="url(#g-${book.id}-${compact ? "c" : "f"})"/>
+          <rect x="18" y="18" width="324" height="234" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.2"/>
+          <rect x="${compact ? 14 : 22}" y="${compact ? 18 : 34}" width="110" height="22" rx="11" fill="${book.accentChip}"/>
+          <text x="${compact ? 69 : 77}" y="${compact ? 33 : 49}" text-anchor="middle" fill="#181c1a" font-family="sans-serif" font-size="10" font-weight="700">${book.category.toUpperCase()}</text>
+          ${svgTitle}
+          <text x="${compact ? 14 : 22}" y="232" fill="#e6ece9" font-family="sans-serif" font-size="12">${book.author}</text>
+        </svg>
+      `;
+    }
+
+    function getFilteredBooks() {
+      const query = state.search.trim().toLowerCase();
+      return BOOKS.filter((book) => {
+        const matchCategory = state.category === "Semua" || book.category === state.category;
+        const matchQuery =
+          !query ||
+          book.title.toLowerCase().includes(query) ||
+          book.author.toLowerCase().includes(query) ||
+          book.category.toLowerCase().includes(query);
+        return matchCategory && matchQuery;
+      });
+    }
+
+    function renderBooks() {
+      const filtered = getFilteredBooks();
+      el.bookGrid.innerHTML = "";
+
+      if (filtered.length === 0) {
+        el.emptyState.hidden = false;
+        return;
+      }
+
+      el.emptyState.hidden = true;
+
+      filtered.forEach((book) => {
+        const card = document.createElement("article");
+        card.className = "book-card";
+        card.innerHTML = `
+          <div class="card-cover-wrap" style="background: ${book.gradient}">
+            ${buildCoverSvg(book, true)}
+            <span class="card-format-pill">${book.pages} hlm &bull; ${book.format}</span>
+          </div>
+          <div class="card-body">
+            <span class="card-meta-top">${book.category}</span>
+            <h3>${book.title}</h3>
+            <p class="card-author">${book.author}</p>
+            <p class="card-excerpt">${book.excerpt}</p>
+            <div class="card-footer">
+              <span class="card-price">${formatRupiah(book.price)}</span>
+              <div class="card-actions">
+                <button type="button" class="btn btn-secondary btn-sm" data-detail-id="${book.id}">Detail</button>
+                <button type="button" class="btn btn-primary btn-sm" data-add-id="${book.id}">+ Keranjang</button>
+              </div>
+            </div>
+          </div>
+        `;
+        el.bookGrid.appendChild(card);
+      });
+    }
+
+    function openDetailModal(bookId) {
+      const book = getBookById(bookId);
+      if (!book) return;
+
+      el.detailCategory.textContent = book.category;
+      el.detailCoverBox.style.background = book.gradient;
+      el.detailCoverBox.innerHTML = buildCoverSvg(book, false);
+      el.detailTitle.textContent = book.title;
+      el.detailAuthor.textContent = `Oleh ${book.author}`;
+      el.detailMeta.textContent = `${book.pages} halaman • Format ${book.format}`;
+      el.detailSynopsis.textContent = book.synopsis;
+      el.detailPrice.textContent = formatRupiah(book.price);
+      el.detailAddBtn.dataset.addId = book.id;
+
+      el.detailHighlights.innerHTML = "";
+      book.highlights.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        el.detailHighlights.appendChild(li);
+      });
+
+      el.detailModal.hidden = false;
+      el.detailModalBackdrop.hidden = false;
+    }
+
+    function closeDetailModal() {
+      el.detailModal.hidden = true;
+      el.detailModalBackdrop.hidden = true;
+    }
+
+    function openCart() {
+      el.cartDrawer.hidden = false;
+      el.cartBackdrop.hidden = false;
+      renderCart();
+    }
+
+    function closeCart() {
+      el.cartDrawer.hidden = true;
+      el.cartBackdrop.hidden = true;
+    }
+
+    function addToCart(bookId) {
+      const book = getBookById(bookId);
+      if (!book) return;
+
+      el.checkoutConfirmation.hidden = true;
+      const existing = state.cart.find((item) => item.id === book.id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({ id: book.id, qty: 1 });
+      }
+      updateCartBadge();
+      renderCart();
+    }
+
+    function changeQty(bookId, delta) {
+      const idx = state.cart.findIndex((item) => item.id === Number(bookId));
+      if (idx === -1) return;
+      state.cart[idx].qty += delta;
+      if (state.cart[idx].qty <= 0) {
+        state.cart.splice(idx, 1);
+      }
+      updateCartBadge();
+      renderCart();
+    }
+
+    function updateCartBadge() {
+      const totalQty = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      el.cartCount.textContent = String(totalQty);
+    }
+
+    function renderCart() {
+      el.cartItems.innerHTML = "";
+
+      if (state.cart.length === 0) {
+        el.cartItems.innerHTML = `
+          <div class="cart-empty">
+            <p>Keranjang belanja Anda masih kosong.</p>
+            <p>Pilih e-book di katalog untuk mulai menambahkan.</p>
+          </div>
+        `;
+      } else {
+        state.cart.forEach((entry) => {
+          const book = getBookById(entry.id);
+          if (!book) return;
+          const row = document.createElement("div");
+          row.className = "cart-item";
+          row.innerHTML = `
+            <div>
+              <h4>${book.title}</h4>
+              <small>${formatRupiah(book.price)} &times; ${entry.qty}</small>
+            </div>
+            <div class="qty-controls">
+              <button type="button" class="qty-btn" data-qty-id="${book.id}" data-delta="-1" aria-label="Kurangi jumlah">&minus;</button>
+              <span>${entry.qty}</span>
+              <button type="button" class="qty-btn" data-qty-id="${book.id}" data-delta="1" aria-label="Tambah jumlah">+</button>
+            </div>
+          `;
+          el.cartItems.appendChild(row);
+        });
+      }
+
+      const subtotal = state.cart.reduce((sum, entry) => {
+        const book = getBookById(entry.id);
+        return sum + (book ? book.price * entry.qty : 0);
+      }, 0);
+
+      const discountRate = state.promoCode && PROMO_CODES[state.promoCode] ? PROMO_CODES[state.promoCode] : 0;
+      const discountAmount = Math.round(subtotal * discountRate);
+      const total = Math.max(0, subtotal - discountAmount);
+
+      el.subtotalText.textContent = formatRupiah(subtotal);
+
+      if (discountAmount > 0) {
+        el.discountRow.hidden = false;
+        el.appliedPromoCode.textContent = state.promoCode;
+        el.discountText.textContent = "-" + formatRupiah(discountAmount);
+      } else {
+        el.discountRow.hidden = true;
+      }
+
+      el.totalText.textContent = formatRupiah(total);
+    }
+
+    el.categoryPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        el.categoryPills.forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+        state.category = pill.dataset.category;
+        renderBooks();
+      });
+    });
+
+    el.searchInput.addEventListener("input", (e) => {
+      state.search = e.target.value;
+      renderBooks();
+    });
+
+    el.resetFilterBtn.addEventListener("click", () => {
+      state.category = "Semua";
+      state.search = "";
+      el.searchInput.value = "";
+      el.categoryPills.forEach((p) => p.classList.toggle("active", p.dataset.category === "Semua"));
+      renderBooks();
+    });
+
+    document.addEventListener("click", (e) => {
+      const addTarget = e.target.closest("[data-add-id]");
+      if (addTarget) {
+        addToCart(addTarget.dataset.addId);
+        openCart();
+        return;
+      }
+
+      const detailTarget = e.target.closest("[data-detail-id]");
+      if (detailTarget) {
+        openDetailModal(detailTarget.dataset.detailId);
+        return;
+      }
+
+      const qtyTarget = e.target.closest("[data-qty-id]");
+      if (qtyTarget) {
+        changeQty(qtyTarget.dataset.qtyId, Number(qtyTarget.dataset.delta));
+      }
+    });
+
+    el.previewFeaturedBtn.addEventListener("click", () => openDetailModal(1));
+    el.closeDetailBtn.addEventListener("click", closeDetailModal);
+    el.detailModalBackdrop.addEventListener("click", closeDetailModal);
+    el.detailAddBtn.addEventListener("click", () => {
+      const id = el.detailAddBtn.dataset.addId;
+      closeDetailModal();
+      addToCart(id);
+      openCart();
+    });
+
+    el.openCartBtn.addEventListener("click", openCart);
+    el.closeCartBtn.addEventListener("click", closeCart);
+    el.cartBackdrop.addEventListener("click", closeCart);
+
+    el.promoForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const code = el.promoInput.value.trim().toUpperCase();
+      if (!code) {
+        state.promoCode = null;
+        el.promoFeedback.textContent = "Masukkan kode promo terlebih dahulu.";
+        renderCart();
+        return;
+      }
+
+      if (PROMO_CODES[code]) {
+        state.promoCode = code;
+        el.promoFeedback.textContent = `Kode ${code} diterapkan (diskon 20%).`;
+      } else {
+        state.promoCode = null;
+        el.promoFeedback.textContent = "Kode promo tidak valid. Coba gunakan HEMAT20.";
+      }
+      renderCart();
+    });
+
+    el.checkoutBtn.addEventListener("click", () => {
+      if (state.cart.length === 0) {
+        el.checkoutConfirmation.hidden = false;
+        el.checkoutConfirmation.textContent = "Tambahkan minimal satu e-book ke keranjang sebelum melanjutkan pemesanan.";
+        return;
+      }
+
+      const summaryItems = state.cart
+        .map((item) => {
+          const book = getBookById(item.id);
+          return book ? `${book.title} (${item.qty}x)` : "";
+        })
+        .filter(Boolean)
+        .join(", ");
+
+      el.checkoutConfirmation.hidden = false;
+      el.checkoutConfirmation.textContent = `Ringkasan pesanan siap: ${summaryItems}. Anda dapat menghubungkan tombol ini ke WhatsApp, formulir pesanan, atau payment gateway klien.`;
+    });
+
+    el.menuToggle.addEventListener("click", () => {
+      const expanded = el.menuToggle.getAttribute("aria-expanded") === "true";
+      el.menuToggle.setAttribute("aria-expanded", String(!expanded));
+      el.mobileNav.hidden = expanded;
+    });
+
+    el.mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        el.menuToggle.setAttribute("aria-expanded", "false");
+        el.mobileNav.hidden = true;
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeDetailModal();
+        closeCart();
+      }
+    });
+
+    const featuredBook = getBookById(1);
+    if (featuredBook && el.heroMiniCover) {
+      el.heroMiniCover.style.background = featuredBook.gradient;
+      el.heroMiniCover.innerHTML = buildCoverSvg(featuredBook, true);
+    }
+
+    renderBooks();
+    updateCartBadge();
+    renderCart();
+  </script>
+</body>
+</html>
